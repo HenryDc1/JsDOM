@@ -1,37 +1,50 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // Obtener referencia al formulario y los elementos relevantes
-    const form = document.querySelector("form");
-    const cursoRadios = document.querySelectorAll('input[name="cursos"]');
-    const otrosInput = document.createElement("input");
-    const otrosLabel = document.createElement("label");
-    const inputs=document.querySelector("input");
-  
-    // Configurar el nuevo input para "Otro"
-    otrosInput.type = "text";
-    otrosInput.name = "otros_input";
-    otrosInput.style.display = "none"; // Inicialmente oculto
-  
-    // Configurar el nuevo label para "Otro"
-    otrosLabel.textContent = "Especificar:";
-    otrosLabel.htmlFor = otrosInput.name;
-    otrosLabel.style.display = "none"; // Inicialmente oculto
-  
-    // Insertar el nuevo input y label en el formulario
-    form.insertBefore(otrosLabel, form.lastElementChild);
-    form.insertBefore(otrosInput, form.lastChild);
-  
-    // Manejar el evento de cambio en los radios
-    form.addEventListener("change", function(event) {
-      // Verificar si la opción "Otro" está seleccionada
-      if (event.target.value === "otro") {
-        // Mostrar el input y el label si "Otro" está seleccionado
-        otrosInput.style.display = "block";
-        otrosLabel.style.display = "block";
-      } else {
-        // Ocultar el input y el label si "Otro" no está seleccionado
-        otrosInput.style.display = "none";
-        otrosLabel.style.display = "none";
-      }
-    });
-  });
-  
+document.addEventListener("DOMContentLoaded", function () {
+  const formulario = document.querySelector("form");
+  const botonEnvio = document.querySelector('form input[type="submit"]');
+
+  function manejarCambioOpcion(evento) {
+    if (evento.target.value === "otro") {
+      agregarOtroInput();
+    } else {
+      eliminarOtroInput();
+    }
+  }
+
+  function agregarOtroInput() {
+    const otroInput = document.createElement("input");
+    const otroLabel = document.createElement("label");
+
+    configurarOtroInput(otroInput);
+    configurarOtroLabel(otroLabel);
+
+    formulario.insertBefore(otroLabel, botonEnvio);
+    formulario.insertBefore(otroInput, botonEnvio);
+  }
+
+  function configurarOtroInput(input) {
+    input.type = "text";
+    input.name = "otros_input";
+    input.style.display = "block";
+  }
+
+  function configurarOtroLabel(label) {
+    label.textContent = "Especificar:";
+    label.htmlFor = "otros_input";
+    label.style.display = "block";
+  }
+
+  function eliminarOtroInput() {
+    const otroInput = formulario.querySelector('input[name="otros_input"]');
+    const otroLabel = formulario.querySelector('label[for="otros_input"]');
+
+    if (otroInput) {
+      formulario.removeChild(otroInput);
+    }
+
+    if (otroLabel) {
+      formulario.removeChild(otroLabel);
+    }
+  }
+
+  formulario.addEventListener("change", manejarCambioOpcion);
+});
