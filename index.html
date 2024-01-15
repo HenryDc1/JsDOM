@@ -1,16 +1,72 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <script src="script.js"></script>
-  </head>
-  <body>
-    <form action="get" method="??">
-      <label for="cursos" > Seleccionar curso:</label><br />
-      <input type="radio" name="cursos" value="html"> HTML<br />
-      <input type="radio" name="cursos" value="css"> CSS<br />
-      <input type="radio" name="cursos" value="otro"> Otro<br />
-      <input type="submit" formenctype="_blank"/>
-    </form>
-  </body>
-</html>  
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vídeo amb HTML5</title>
+    <style>
+        /* Afegeix qualsevol estil addicional aquí */
+        /* Oculta els botons per defecte */
+        button {
+            display: none;
+        }
+    </style>
+    <script defer>
+        document.addEventListener('DOMContentLoaded', function () {
+            var video = document.querySelector('video');
+            var stopButton = document.getElementById('stopButton');
+            var playButton = document.getElementById('playButton');
+            var playPauseButton = document.getElementById('playPauseButton');
+
+            // Mostra els botons ara que JavaScript està habilitat
+            stopButton.style.display = 'inline-block';
+            playButton.style.display = 'inline-block';
+            playPauseButton.style.display = 'inline-block';
+
+            function aturarVideo() {
+                video.pause();
+            }
+
+            function reproduirVideo() {
+                video.play();
+            }
+
+            function playPauseVideo() {
+                if (video.paused) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+            }
+        });
+    </script>
+</head>
+<body>
+ 
+<h2>Vídeo amb HTML5</h2>
+  
+<!-- Apartat 1 -->
+<video controls width="600" poster="https://agora.xtec.cat/iesesteveterradas/wp-content/uploads/usu855/cabecera_web_v2.jpg">
+    <!-- Format WEBM -->
+    <source src="http://bezerik.es/online/small.webm" type="video/webm">
+    <!-- Format OGG -->
+    <source src="http://bezerik.es/online/small.ogv" type="video/ogg">
+    <!-- Format MP4 -->
+    <source src="http://bezerik.es/online/small.mp4" type="video/mp4">
+    <!-- Format 3GP -->
+    <source src="http://bezerik.es/online/small.3gp" type="video/3gp">
+
+    El teu navegador no suporta l'element de vídeo.
+</video>
+
+<!-- Afegit per a l'Apartat 4 -->
+<button id="stopButton" onclick="aturarVideo()">Aturar</button>
+<button id="playButton" onclick="reproduirVideo()">Reproduir</button>
+<button id="playPauseButton" onclick="playPauseVideo()">Play/Pause</button>
+
+<noscript>
+    <p>JavaScript no està habilitat. Els botons no estaran disponibles.</p>
+</noscript>
+
+</body>
+</html>
